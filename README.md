@@ -11,13 +11,14 @@ AMI： ami-0892d3c7ee96c0bf7<br/>
 ```
 apt-get update
 ```
-2. 安装lrzsz,zip
+2. 安装lrzsz,zip,git
 ```
-apt install lrzsz zip -y
+apt install lrzsz zip git -y
 ```
-3. 上传代码<br/>
-使用rz命令将附件中代码docker.zip上传到/root目录并解压
-
+3. 下载代码
+```
+git clone https://github.com/SpikeShen/rct-exam.git
+```
 4. 安装docker
 ```
 curl https://get.docker.com | sh  && sudo systemctl --now enable docker
@@ -50,6 +51,7 @@ reboot
 ```
 10. 启动推理服务
 ```
+cd rct-exam
 docker-compose -f docker-compose-single-gpu.yaml up -d \
 --scale tianlongintent_sementic_web-1=4 \
 --force-recreate --remove-orphans
