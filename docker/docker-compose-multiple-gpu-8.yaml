@@ -1,0 +1,121 @@
+services:
+  tianlongintent_sementic_web-1:
+    image: flczmsxh/rct_comp_plat_exam_2022:latest
+    volumes:
+      - /root/rct-comp-platform-exam-2022/data:/rct/data
+    command: python3 torch_server.py -p 8080
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - device_ids: ['0']
+              capabilities:
+              - gpu
+  tianlongintent_sementic_web-2:
+    image: flczmsxh/rct_comp_plat_exam_2022:latest
+    volumes:
+      - /root/rct-comp-platform-exam-2022/data:/rct/data
+    command: python3 torch_server.py -p 8080
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - device_ids: ['1']
+              capabilities:
+              - gpu
+  tianlongintent_sementic_web-3:
+    image: flczmsxh/rct_comp_plat_exam_2022:latest
+    volumes:
+      - /root/rct-comp-platform-exam-2022/data:/rct/data
+    command: python3 torch_server.py -p 8080
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - device_ids: ['2']
+              capabilities:
+              - gpu
+  tianlongintent_sementic_web-4:
+    image: flczmsxh/rct_comp_plat_exam_2022:latest
+    volumes:
+      - /root/rct-comp-platform-exam-2022/data:/rct/data
+    command: python3 torch_server.py -p 8080
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - device_ids: ['3']
+              capabilities:
+              - gpu
+  tianlongintent_sementic_web-5:
+    image: flczmsxh/rct_comp_plat_exam_2022:latest
+    volumes:
+      - /root/rct-comp-platform-exam-2022/data:/rct/data
+    command: python3 torch_server.py -p 8080
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - device_ids: ['4']
+              capabilities:
+              - gpu
+  tianlongintent_sementic_web-6:
+    image: flczmsxh/rct_comp_plat_exam_2022:latest
+    volumes:
+      - /root/rct-comp-platform-exam-2022/data:/rct/data
+    command: python3 torch_server.py -p 8080
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - device_ids: ['5']
+              capabilities:
+              - gpu
+  tianlongintent_sementic_web-7:
+    image: flczmsxh/rct_comp_plat_exam_2022:latest
+    volumes:
+      - /root/rct-comp-platform-exam-2022/data:/rct/data
+    command: python3 torch_server.py -p 8080
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - device_ids: ['6']
+              capabilities:
+              - gpu
+  tianlongintent_sementic_web-8:
+    image: flczmsxh/rct_comp_plat_exam_2022:latest
+    volumes:
+      - /root/rct-comp-platform-exam-2022/data:/rct/data
+    command: python3 torch_server.py -p 8080
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - device_ids: ['7']
+              capabilities:
+              - gpu
+  nginx:
+    image: axizdkr/tengine
+    container_name: tianlong-nginx
+    volumes:
+      - "./nginx-gpu.conf:/etc/nginx/conf.d/nginx.conf"
+      - "/usr/share/zoneinfo/Asia/Shanghai:/usr/share/zoneinfo/Asia/Shanghai"
+      - "/etc/localtime:/etc/localtime:ro"
+    depends_on:
+      - tianlongintent_sementic_web-1
+      - tianlongintent_sementic_web-2
+      - tianlongintent_sementic_web-3
+      - tianlongintent_sementic_web-4
+      - tianlongintent_sementic_web-5
+      - tianlongintent_sementic_web-6
+      - tianlongintent_sementic_web-7
+      - tianlongintent_sementic_web-8
+    ports:
+      - mode: host
+        protocol: tcp
+        published: 8032
+        target: 8032
+    environment:
+      TZ: 'Asia/Shanghai'
+    restart: always
