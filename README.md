@@ -28,26 +28,26 @@ curl https://get.docker.com | sh  && sudo systemctl --now enable docker
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
    && curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
    && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
-apt-get update<br/>
-apt-get install -y nvidia-docker2 –y<br/>
-systemctl restart docker<br/>
+apt-get update
+apt-get install -y nvidia-docker2 –y
+systemctl restart docker
 ```
-6. 测试验证
-```
-docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
-```
-7. 安装docker-compose
+6. 安装docker-compose
 ```
 curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
-8. 安装驱动
+7. 安装驱动
 ```
 apt install nvidia-driver-470 –y
 ```
-9. 重启
+8. 重启
 ```
 reboot
+```
+9. 测试验证
+```
+docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
 ```
 10. 启动推理服务
 ```
